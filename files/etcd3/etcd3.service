@@ -1,0 +1,35 @@
+[Unit]
+Description=etcd
+Documentation=https://github.com/coreos/etcd
+
+[Service]
+User=etcd
+Group=etcd
+Restart=on-failure
+RestartSec=25s
+LimitNOFILE=40000
+TimeoutStartSec=20s
+EnvironmentFile=/etc/etcd.d/etcd.conf
+ExecStart=/usr/local/bin/etcd \
+    --name etcd-${NODE_1_IP} \
+    --data-dir ${DATA_DIR} \
+    --quota-backend-bytes 8589934592 \
+    --listen-client-urls https://${NODE_1_IP}:2379,https://localhost:2379 \
+    --advertise-client-urls https://${NODE_1_IP}:2379,https://localhost:2379 \
+    --listen-peer-urls https://${NODE_1_IP}:2380 \
+    --initial-advertise-peer-urls https://${NODE_1_IP}:2380 \
+    --initial-cluster 'etcd-${NODE_1_IP}=https://${NODE_1_IP}:2380,etcd-${NODE_2_IP}=https://${NODE_2_IP}:2380,etcd-${NODE_3_IP}=https://${NODE_3_IP}:2380' \
+    --initial-cluster-token my-etcd-token \
+    --initial-cluster-state new \
+    --client-cert-auth \
+    --trusted-ca-file ${SSL_DIR}/etcd-root-ca.pem \
+    --cert-file ${SSL_DIR}/etcd.pem \
+    --key-file ${SSL_DIR}/etcd-key.pem \
+    --peer-client-cert-auth \
+    --peer-trusted-ca-file ${SSL_DIR}/etcd-root-ca.pem \
+    --peer-cert-file ${SSL_DIR}/etcd.pem \
+    --peer-key-file ${SSL_DIR}/etcd-key.pem \
+    --auto-compaction-retention 3
+
+[Install]
+WantedBy=multi-user.target
