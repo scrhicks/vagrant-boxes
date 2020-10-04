@@ -1,7 +1,8 @@
 build {
   sources = [
     "sources.virtualbox-iso.etcd3",
-    "sources.virtualbox-iso.vault"
+    "sources.virtualbox-iso.vault",
+    "sources.virtualbox-iso.docker"
   ]
 
   provisioner "shell" {
@@ -13,8 +14,12 @@ build {
   }
 
   provisioner "file" {
-    source = "${local.files_directory}/${source.name}"
+    source      = "${local.files_directory}/${source.name}"
     destination = "/tmp"
+    only = [
+      "virtualbox-iso.etcd3", 
+      "virtualbox-iso.vault"
+    ]
   }
 
   provisioner "shell" {
