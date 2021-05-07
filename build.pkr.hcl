@@ -3,7 +3,8 @@ build {
     "sources.virtualbox-iso.etcd3",
     "sources.virtualbox-iso.vault",
     "sources.virtualbox-iso.docker",
-    "sources.virtualbox-iso.ubuntu"
+    "sources.virtualbox-iso.ubuntu",
+    "sources.virtualbox-iso.postgresql"
   ]
 
   provisioner "shell" {
@@ -45,7 +46,8 @@ build {
       "ETCD_VERSION=v3.4.13",
       "VAULT_VERSION=1.5.4",
       "VAULT_KEY_SHARES=1",
-      "VAULT_kEY_THRESHOLD=1"
+      "VAULT_kEY_THRESHOLD=1",
+      "PG_VERSION=11"
     ]
     execute_command = "echo 'vagrant' | {{.Vars}} sudo -S -E bash -eux '{{.Path}}'"
     scripts = [
@@ -54,7 +56,8 @@ build {
     only = [
       "virtualbox-iso.etcd3", 
       "virtualbox-iso.vault",
-      "virtualbox-iso.docker"
+      "virtualbox-iso.docker",
+      "virtualbox-iso.postgresql"
     ]
   }
 
