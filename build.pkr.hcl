@@ -43,8 +43,8 @@ build {
     environment_vars = [
       "HOME_DIR=/home/vagrant",
       "TMP_FILE_DIR=/tmp/${source.name}",
-      "ETCD_VERSION=v3.4.13",
-      "VAULT_VERSION=1.5.4",
+      "ETCD_VERSION=v3.4.16",
+      "VAULT_VERSION=1.7.2",
       "VAULT_KEY_SHARES=1",
       "VAULT_kEY_THRESHOLD=1",
       "PG_VERSION=11"

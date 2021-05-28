@@ -229,7 +229,7 @@ source "virtualbox-iso" "postgresql" {
   iso_checksum         = var.iso_checksum
   iso_url              = var.iso_url
   memory               = var.memory
-  output_directory     = "${local.build_directory}/packer-ubuntu"
+  output_directory     = "${local.build_directory}/packer-postgresql"
   shutdown_command     = "echo 'vagrant' | sudo -S shutdown -P now"
   ssh_password         = "vagrant"
   ssh_port             = 22
