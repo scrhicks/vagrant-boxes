@@ -1,12 +1,37 @@
 # vagrant-boxes
 This repository contains packer temapltes to build vagrant box
 
-Calculate Docker SHA256 file hash
+## Build images
+
+### Docker
 ```powershell
-Get-FileHash \builds\virtualbox-iso\docker.box | Format-List
+packer build -only virtualbox-iso.docker .
 ```
 
-Calculate Ubuntu SHA256 file hash
+### Ubuntu
 ```powershell
-Get-FileHash .\builds\virtualbox-iso\ubuntu.box | Format-List
+packer build -only virtualbox-iso.ubuntu .
 ```
+
+### Postgresql
+```powershell
+packer build -only virtualbox-iso.postgresql .
+```
+
+## Calculate SHA256 hash
+
+### Docker
+```powershell
+Get-FileHash ./builds/virtualbox-iso/docker.box | Format-List
+```
+
+### Ubuntu
+```powershell
+Get-FileHash ./builds/virtualbox-iso/ubuntu.box | Format-List
+```
+
+### Postgresql
+```powershell
+Get-FileHash ./builds/virtualbox-iso/postgresql.box | Format-List
+```
+
